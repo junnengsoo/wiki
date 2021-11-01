@@ -1,0 +1,12 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+{% if entry %}
+    {{ entry }}
+{% else %}
+    {% url 'error_404' %}
+{% endblock %}
