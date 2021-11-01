@@ -21,5 +21,4 @@ urlpatterns = [
     path('wiki/', include("encyclopedia.urls"))
 ]
 
-
-handler404 = 'encyclopedia.view.error_404_view'
+handler404 = 'encyclopedia.views.error_404_view'

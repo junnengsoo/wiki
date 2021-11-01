@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from util import get_entry
 from . import util
 
 
 def error_404_view(request, exception):
-    return render(request, '404.html')
+    return render(request, 'encyclopedia/404.html')
 
 
 def index(request):
@@ -14,7 +13,11 @@ def index(request):
 
 
 def entry_page(request, title):
-    return render(request, "encyclopedia/entry_page.html", {
-        "title": title,
-        "entry": get_entry(title)
-    })
+    content = util.get_entry(title)
+    if content:
+        return render(request, "encyclopedia/entry_page.html", {
+            "title": title,
+            "entry": util.get_entry(title)
+        })
+    else:
+        return render(request, 'encyclopedia/404.html', status=404)
