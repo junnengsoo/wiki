@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import util
 
 
@@ -21,3 +21,11 @@ def entry_page(request, title):
         })
     else:
         return render(request, 'encyclopedia/404.html', status=404)
+
+
+def search(request):
+    search_query = request.get('search_query')
+    if search_query in util.list_entries():
+        return redirect('entry_page')
+    else:
+        return None
