@@ -28,7 +28,7 @@ def search_results(request):
 
 
 def search(request):
-    search_query = request.GET.get('search_query')
+    search_query = request.POST['search_query']
     if search_query in util.list_entries():
         return redirect('entry_page', title=search_query)
     for entry in util.list_entries():
