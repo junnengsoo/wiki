@@ -23,9 +23,14 @@ def entry_page(request, title):
         return render(request, 'encyclopedia/404.html', status=404)
 
 
+def search_results(request):
+    return render(request, "encyclopedia/search_results.html")
+
+
 def search(request):
-    search_query = request.get('search_query')
+    search_query = request.GET.get('search_query')
     if search_query in util.list_entries():
-        return redirect('entry_page')
-    else:
-        return None
+        return redirect('entry_page', title=search_query)
+    for entry in util.list_entries():
+        if search_query in entry:
+            return redirect('search_results')
