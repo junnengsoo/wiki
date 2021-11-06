@@ -8,7 +8,7 @@
     <h1>Related pages</h1>
 
     <ul>
-        {% for entry in entries %}
+        {% for entry in search_results_list %}
             <li><a href="{% url 'entry_page' title=entry %}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
