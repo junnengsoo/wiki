@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    New Page
+{% endblock %}
+
+{% block body %}
+<h1>Create New Page</h1>
+
+<form action="{% url 'save_page' %}" method="POST">
+    {% csrf_token %}
+    <label>Title:</label>
+    <br>
+    <input id="title" type="text" name="title">
+    <br>
+    <label>Content:</label>
+    <br>
+    <textarea id="content" name="content" rows="4" cols="50"></textarea>
+    <br>
+    <input type="submit" value="Save Page">
+</form>
+
+<p>The entry should be written in Markdown language. Refer to <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank">this link</a> for more information.</p>
+{% endblock %}

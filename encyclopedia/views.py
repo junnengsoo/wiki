@@ -42,3 +42,25 @@ def search(request):
             return redirect('search_results', search_query=search_query)
     else:
         return redirect('index')
+
+
+def new_page(request):
+    return render(request, "encyclopedia/new_page.html")
+
+
+def save_page(request):
+    title = request.POST['title']
+    content = request.POST['content']
+    if title in util.list_entries():
+        return redirect('page_exists', title=title)
+    else:
+        util.save_entry(title, content)
+        return redirect('entry_page', title=title)
+
+
+def page_exists(request, title):
+    print("test1")
+    print(title)
+    return render(request, "encyclopedia/page_exists.html", {
+        "existing_page": title
+    })
