@@ -11,13 +11,14 @@
     {% csrf_token %}
     <label>Title:</label>
     <br>
-    <input id="title" type="text" name="title">
+    <input id="title" type="text" name="title" value="{{ title }}">
     <br>
     <label>Content:</label>
     <br>
-    <textarea id="content" name="content" rows="4" cols="50"></textarea>
+    <textarea id="content" name="content" rows="4" cols="50">{{ content }}</textarea>
     <br>
     <input type="submit" value="Save Page">
+    {{ message }}
 </form>
 
 <p>The entry should be written in Markdown language. Refer to <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank">this link</a> for more information.</p>

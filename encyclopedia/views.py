@@ -41,7 +41,7 @@ def search(request):
         if search_query in entry:
             return redirect('search_results', search_query=search_query)
     else:
-        return redirect('index')
+        return redirect('entry_page', title=search_query)
 
 
 def new_page(request):
@@ -52,15 +52,11 @@ def save_page(request):
     title = request.POST['title']
     content = request.POST['content']
     if title in util.list_entries():
-        return redirect('page_exists', title=title)
+        return render(request, "encyclopedia/new_page.html", {
+            "message": "Title already exist. Try another.", "title": title, "content": content})
+    elif title == "" or content == "":
+        return render(request, "encyclopedia/new_page.html", {
+            "message": "Please fill all empty fields."})
     else:
         util.save_entry(title, content)
         return redirect('entry_page', title=title)
-
-
-def page_exists(request, title):
-    print("test1")
-    print(title)
-    return render(request, "encyclopedia/page_exists.html", {
-        "existing_page": title
-    })

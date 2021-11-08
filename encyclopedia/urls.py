@@ -10,7 +10,6 @@ urlpatterns = [
     path("search_results/<str:search_query>", views.search_results, name="search_results"),
     path("new_page", views.new_page, name="new_page"),
     path("save_page", views.save_page, name="save_page"),
-    path("page_exists/<str:title>", views.page_exists, name="page_exists")
 ]
 
 
