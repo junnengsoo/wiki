@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . import util
+import markdown
 
 
 def error_404_view(request, exception):
@@ -13,7 +14,7 @@ def index(request):
 
 
 def entry_page(request, title):
-    content = util.get_entry(title)
+    content = markdown.markdown(util.get_entry(title))
     if content:
         return render(request, "encyclopedia/entry_page.html", {
             "title": title,
@@ -60,3 +61,6 @@ def save_page(request):
     else:
         util.save_entry(title, content)
         return redirect('entry_page', title=title)
+
+
+def edit_page(request):
