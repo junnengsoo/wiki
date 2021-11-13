@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Edit Page
+{% endblock %}
+
+{% block body %}
+<h1>Edit Page</h1>
+
+<form action="{% url 'save_page' %}" method="POST">
+    {% csrf_token %}
+    <label>Title:</label>
+    <br>
+    <input id="title" type="text" name="title" value="{{ title }}">
+    <br>
+    <label>Content:</label>
+    <br>
+    <textarea id="content" name="content" rows="4" cols="50">{{ content }}</textarea>
+    <br>
+    <input type="submit" value="Edit Page">
+    {{ message }}
+</form>
+
+<p>The entry should be written in Markdown language. Refer to <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">this link</a> for more information.</p>
+{% endblock %}

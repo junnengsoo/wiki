@@ -63,4 +63,8 @@ def save_page(request):
         return redirect('entry_page', title=title)
 
 
-def edit_page(request):
+def edit_page(request, title):
+    return render(request, "encyclopedia/edit_page.html", {
+        "content": util.get_entry(title),
+        "title": title
+    })
