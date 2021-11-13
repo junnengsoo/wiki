@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from . import util
+import markdown2
 import markdown
+import random
 
 
 def error_404_view(request, exception):
@@ -14,11 +16,11 @@ def index(request):
 
 
 def entry_page(request, title):
-    content = markdown.markdown(util.get_entry(title))
+    content = util.get_entry(title)
     if content:
         return render(request, "encyclopedia/entry_page.html", {
             "title": title,
-            "entry": util.get_entry(title)
+            "entry": markdown.markdown(content)
         })
     else:
         return render(request, 'encyclopedia/404.html', status=404)
@@ -68,3 +70,7 @@ def edit_page(request, title):
         "content": util.get_entry(title),
         "title": title
     })
+
+
+def random_page(request):
+    return redirect('entry_page', title=random.choice(util.list_entries()))
